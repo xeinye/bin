@@ -1,0 +1,8 @@
+#!/bin/sh
+#
+# Change filenames
+
+for f in *.mkv
+do
+	mv "$f" "$(echo "$f"  | awk -F '.' 'OFS="." {print $4,$11}')"
+done 
