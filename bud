@@ -1,0 +1,7 @@
+#!/bin/sh 
+
+display \
+    -page 3200x \
+    -sample 3200x \
+    -window root \
+        "$1" &
