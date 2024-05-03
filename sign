@@ -1,0 +1,8 @@
+#!/bin/sh
+#
+
+chmod 600 ~/.ssh/id_ed25519
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_ed25519
+gpg --import ~/private.gpg 
+gpg --edit-key 82726847+xeinye@users.noreply.github.com
