@@ -1,0 +1,44 @@
+#!/bin/sh
+
+weather(){
+  printf "weather %s\n" $(curl -s wttr.in/?format="%t") 
+}
+
+cpu_temp(){
+    case $(uname -s) in 
+        "Linux") 
+            while IFS= read -r a; do
+                printf "cpu %.2sºC\n" "$a"
+            done < "/sys/class/thermal/thermal_zone0/temp"
+            ;;
+
+        "OpenBSD") 
+            while read -r a; do
+                oi=${a%%degC}
+                printf "cpu %.2sºC\n" "$a"
+            done <<-EOF 
+$(sysctl -n hw.sensors.cpu0.temp0)
+EOF
+    esac
+}
+
+gpu_temp(){
+    case $(uname -s) in 
+        "Linux") 
+            while IFS= read -r a
+            do
+                printf "gpu %.2sºC\n" "$a"
+            done < "/sys/class/drm/card0/device/hwmon/hwmon0/temp1_input"
+            ;;
+
+        *)
+    esac
+}
+
+main(){
+    weather
+    cpu_temp
+    gpu_temp
+}
+
+main
