@@ -1,0 +1,11 @@
+#!/bin/sh
+
+ffmpeg \
+    -hide_banner \
+    -loglevel error \
+    -thread_queue_size 512 -f sndio -i snd/0.mon \
+    -f x11grab \
+    -video_size 1920x1080 \
+    -i :0.0+0,0 \
+    -pix_fmt yuv420p \
+    -framerate 30 "$1"

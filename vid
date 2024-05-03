@@ -1,0 +1,7 @@
+#!/bin/sh
+#
+# Download with the best quality available
+
+yt-dlp \
+  -f 'best[ext=mp4]' \
+  "$@"
