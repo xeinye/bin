@@ -1,7 +1,10 @@
 #!/bin/sh
 #
+echo "ssh key"
+doas chown $USER ~/.ssh 
+echo "gpg"
+doas chown $USER ~/private.gpg
 
-chmod 600 ~/.ssh/id_ed25519
 eval "$(ssh-agent -s)"
 ssh-add ~/.ssh/id_ed25519
 gpg --import ~/private.gpg 
