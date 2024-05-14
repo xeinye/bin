@@ -5,10 +5,9 @@
 case "$1" in
     "-season"|"-s")
         for x in *; do
-            extension="${x##*.}"
             basename=$(echo "$x" | sed -n 's/.*\([0-9]\{1,2\}ª Temporada\).*/\1/p')
             if [ -n "$basename" ]; then
-                new_name="$basename.$extension"
+                new_name="$basename"
                 if [ ! -e "$new_name" ]; then
                     mv "$x" "$new_name"
                 else
