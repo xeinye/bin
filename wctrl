@@ -58,7 +58,7 @@ case "$1" in
 
 
    "-q") # kill window
-       killw $2
+       killw -p $2
     ;;
    "-c") # centralize
        WID=$(pfw)

@@ -1,0 +1,39 @@
+#!/bin/sh
+#
+# Change filenames
+
+case "$1" in
+    "-season"|"-s")
+        for x in *; do
+            extension="${x##*.}"
+            basename=$(echo "$x" | sed -n 's/.*\([0-9]\{1,2\}ª Temporada\).*/\1/p')
+            if [ -n "$basename" ]; then
+                new_name="$basename.$extension"
+                if [ ! -e "$new_name" ]; then
+                    mv "$x" "$new_name"
+                else
+                    echo "File $new_name already exists. Skipping."
+                fi
+            fi
+        done
+        ;;
+
+    "-episode"|"-e")
+        for x in *; do
+            extension="${x##*.}"
+            basename=$(echo "$x" | sed -n 's/.*[sS]\([0-9]\{2\}\)[eE]\([0-9]\{2\}\).*/S\1E\2/p')
+            if [ -n "$basename" ]; then
+                new_name="$basename.$extension"
+                if [ ! -e "$new_name" ]; then
+                    mv "$x" "$new_name"
+                else
+                    echo "File $new_name already exists. Skipping."
+                fi
+            fi
+        done
+        ;;
+
+    *)
+        echo "Usage: cutter {-season|-s|-episode|-e}"
+        ;;
+esac
