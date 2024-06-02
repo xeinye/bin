@@ -1,6 +1,6 @@
 #!/bin/sh
 echo "mpv"
-cp -r ~/.config/mpv ~/git/dotfiles/mpv
+cp -r ~/.config/mpv ~/git/dotfiles/
 echo "misc"
 cp ~/.profile ~/git/dotfiles/misc/profile
 cp ~/.config/sxhkd/sxhkdrc ~/git/dotfiles/misc/
