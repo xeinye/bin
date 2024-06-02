@@ -1,7 +1,11 @@
 #!/bin/sh 
 
-display \
-    -page 3200x \
-    -sample 3200x \
-    -window root \
-        "$1" &
+case $1 in
+    "-s")
+        xwallpaper --no-randr --tile ~/rules/wall
+        ;;
+
+        *)
+        xwallpaper --no-randr --tile "$1"
+        ln -sf "$PWD/$1" ~/rules/wall
+esac
