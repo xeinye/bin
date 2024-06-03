@@ -1,11 +1,16 @@
-#!/bin/sh 
+#!/bin/sh
 
 case $1 in
     "-s")
         xwallpaper --no-randr --tile ~/rules/wall
         ;;
 
-        *)
-        xwallpaper --no-randr --tile "$1"
-        ln -sf "$PWD/$1" ~/rules/wall
+    *)
+        image_path=$(realpath "$1")
+        if [ -f "$image_path" ]; then
+            xwallpaper --no-randr --tile "$image_path"
+            ln -sf "$image_path" ~/rules/wall
+        fi
+        ;;
 esac
+
