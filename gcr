@@ -9,6 +9,11 @@ case $repo_remote in
         repo=${repo_remote##https://github.com/}
         repo=${repo%%.git}
         repo=git@github.com:$repo.git
+;;
+	*git://git.anjeel.xyz*)
+        repo=${repo_remote##git://git.anjeel.xyz/}
+        repo=${repo%%.git}
+        repo=git@git.anjeel.xyz:${repo##*/}
     ;;
 
     *) exit 1 ;;

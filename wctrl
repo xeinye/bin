@@ -72,7 +72,7 @@ case "$1" in
 
    "-cy") # cycle between windows, expected input: prev, next or wid
 	shift
-	BW=${BW:-2}                    # border width
+	BW=${BW:-0}                    # border width
 	ACTIVE=${ACTIVE:-0xffffff}     # active border color
 	INACTIVE=${INACTIVE:-0x323232} # inactive border color
 	
