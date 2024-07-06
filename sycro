@@ -6,6 +6,5 @@ cp ~/.profile ~/git/dotfiles/misc/profile
 cp ~/.config/sxhkd/sxhkdrc ~/git/dotfiles/misc/
 cp ~/rules/rc ~/git/dotfiles/misc/
 cp ~/rules/xsession ~/git/dotfiles/misc/
-echo "vim"
-mkdir -p ~/git/dotfiles/vim
-cp -r ~/.vim/vimrc ~/git/dotfiles/vim/vimrc
+echo "vis"
+cp -r ~/.config/vis ~/git/dotfiles/

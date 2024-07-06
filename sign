@@ -2,10 +2,10 @@
 #
 echo "ssh key"
 doas chown $USER ~/.ssh 
-echo "gpg"
-doas chown $USER ~/private.gpg
+#echo "gpg"
+#doas chown $USER ~/private.gpg
 
 eval "$(ssh-agent -s)"
 ssh-add ~/.ssh/id_ed25519
-gpg --import ~/private.gpg 
-gpg --edit-key 82726847+xeinye@users.noreply.github.com
+#gpg --import ~/PRIVATE.GPG
+#gpg --edit-key 82726847+xeinye@users.noreply.github.com

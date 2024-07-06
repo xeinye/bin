@@ -10,10 +10,10 @@ case $repo_remote in
         repo=${repo%%.git}
         repo=git@github.com:$repo.git
 ;;
-	*git://git.anjeel.xyz*)
-        repo=${repo_remote##git://git.anjeel.xyz/}
+	*git://git.zepp.club*)
+        repo=${repo_remote##git://git.zepp.club/}
         repo=${repo%%.git}
-        repo=git@git.anjeel.xyz:${repo##*/}
+        repo=git@git.zepp.club:${repo##*/}
     ;;
 
     *) exit 1 ;;
