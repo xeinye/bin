@@ -1,0 +1,29 @@
+#!/bin/sh
+      
+swidth=$(wattr w `lsw -r`)
+geom="${swidth}x20"
+
+BG="#1c1c1c"
+FG="#dddddd"
+
+LEMON_FLAVOR="-dbg $geom -B${BG} -F${FG}"
+
+clock() {
+	printf 'TIME %%{R} %s %%{R}' "$(date +%H:%M)"
+}
+
+ todo() {
+	printf 'TODO %%{R} %d %%{R}' $(<$HOME/.todo wc -l)
+}
+
+sound() {
+sndioctl output.level | awk -F '=' '{ printf "%.2f%%\n", $2 * 100 }'
+}
+
+while :; do
+	BUF=
+	BUF="aaaaaaaa"
+	BUF="${BUF}%{r}$(todo) $(sound) $(clock)"
+	echo $BUF
+	sleep 1
+done | lemonbar $LEMON_FLAVOR
