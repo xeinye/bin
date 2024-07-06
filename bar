@@ -13,7 +13,7 @@ clock() {
 }
 
  todo() {
-	printf 'TODO %%{R} %d %%{R}' $(<$HOME/.todo wc -l)
+	printf 'TODO %%{R} %d %%{R}' $(<$HOME/rules/todo wc -l)
 }
 
 sound() {
