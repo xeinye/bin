@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+[ -d $HOME/.config/steam ] || mkdir -p $HOME/.config/steam 
+HOME=$HOME/.config/steam/
+exec /usr/bin/steam "$@"
