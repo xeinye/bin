@@ -9,6 +9,10 @@ case $repo_remote in
         repo=${repo_remote##https://github.com/}
         repo=${repo%%.git}
         repo=git@github.com:$repo.git
+        echo 'signing key changed'
+        git config user.signingkey C7509FB0D2DE4B09
+        git config user.email 82726847+xeinye@users.noreply.github.com
+        git config user.name xeinye
 ;;
 	*git://git.zepp.club*)
         repo=${repo_remote##git://git.zepp.club/}
