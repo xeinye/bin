@@ -1,0 +1,51 @@
+#!/bin/sh
+
+read -p "ISO path: (eg: $HOME/linux.iso)" iso
+read -p "Storage size (eg: 20G): " size
+
+if [ -z "$iso" ] || [ -z "$size" ]; then
+    echo "Both ISO path and storage size are required."
+    exit 1
+fi
+
+if [ ! -f "$iso" ]; then
+    echo "ISO file not found: $iso"
+    exit 1
+fi
+
+qemu_dir="$HOME/git/qemu"
+
+[ ! -d "$qemu_dir" ] && mkdir -p "$qemu_dir"
+
+iso_base=$(basename "$iso")
+today=$(date +%d-%m-%Y)
+disk_image="$qemu_dir/${iso_base%.*}-$today.qcow2"
+
+read -p "Proceed with ISO='$iso' and size='$size'? Disk image will be '$disk_image'. (y/n): " answer
+
+case "$answer" in
+    y|Y)
+        qemu-img create -f qcow2 "$disk_image" "$size" || exit 1
+
+        qemu-system-x86_64 \
+          -enable-kvm \
+          -cpu host \
+          -m 6G \
+          -smp 4 \
+          -machine type=q35,accel=kvm \
+          -bios /usr/share/ovmf/bios.bin \
+          -cdrom "$iso" \
+          -drive file="$disk_image",format=qcow2,if=virtio \
+          -display sdl,gl=on \
+          -device virtio-net-pci,netdev=net0 \
+          -netdev user,id=net0 \
+          -device ich9-intel-hda \
+          -device hda-duplex,audiodev=snd0 \
+          -audiodev pa,id=snd0 \
+          -boot menu=on
+        ;;
+    *)
+        echo "Aborted."
+        exit 0
+        ;;
+esac
