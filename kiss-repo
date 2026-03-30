@@ -1,0 +1,10 @@
+#!/bin/sh
+
+for pkg in $(kiss list); do
+    for repo in ${KISS_PATH//:/ }; do
+        if [ -d "$repo/$pkg" ]; then
+            printf "%-20s -> %s\n" "$pkg" "$repo"
+            break
+        fi
+    done
+done
