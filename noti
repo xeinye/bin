@@ -1,0 +1,18 @@
+#!/bin/sh -e
+
+while true; do
+    sleep 300
+
+    foot -T noti -W 40x3 -e sh -c "
+    ENV=/dev/null
+    export ENV
+    PS1=''
+    date
+    exec sh -i
+    " &
+
+    PID=$!
+
+    sleep 120
+    kill $PID 2>/dev/null || true
+done
